@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+}
+
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+.section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.btn-warning {
+  background-color: #f1c40f;
+  color: black;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+}
+
+.generated-info {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.alert {
+  background-color: #ffeaa7;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 5px solid #fdcb6e;
+  font-weight: bold;
+  color: #333;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #ecf0f1;
+}
+
+.logout-corner {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: #c0392b;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.logout-corner:hover {
+  background-color: #e74c3c;
+}
+

@@ -43,6 +43,7 @@ This is the default login/register page, this will be later used as an account c
                 <button type="submit">Start Anonymous Chat</button>
             </form>
         </div>
+        
     @endauth
 
 </body>

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->boolean('is_admin')->default(true);
-            $table->boolean('is_dispatcher')->default(true);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_dispatcher')->default(false);
             $table->string('id_number')->unique(); 
             $table->string('password');
             $table->rememberToken();
