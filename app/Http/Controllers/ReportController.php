@@ -21,7 +21,9 @@ class ReportController extends Controller
 
         $path = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('reports', 'public'); // returns "reports/xxx.jpg"
+            $filename = time() . '_' . uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('storage/reports'), $filename);
+            $path = 'reports/' . $filename;
         }
 
         $report = Report::create([
