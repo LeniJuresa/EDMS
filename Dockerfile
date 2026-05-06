@@ -12,9 +12,15 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . .
 
+RUN cp .env.example .env
+
 RUN composer install --no-dev --optimize-autoloader
 
 RUN npm install && npm run build
+
+RUN php artisan key:generate --force
+
+RUN php artisan config:cache
 
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
@@ -27,4 +33,4 @@ RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available
 
 EXPOSE 10000
 
-CMD php artisan config:clear && php artisan key:generate --force && apache2-foreground
+CMD ["apache2-foreground"]
