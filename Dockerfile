@@ -1,22 +1,30 @@
 FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y \
-    git curl zip unzip libpng-dev libonig-dev libxml2-dev
-
-RUN docker-php-ext-install pdo pdo_mysql
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 WORKDIR /var/www/html
+
+RUN apt-get update && apt-get install -y \
+    git unzip zip curl \
+    libpng-dev libonig-dev libxml2-dev libzip-dev \
+    nodejs npm \
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . .
 
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan key:generate
+RUN npm install && npm run build
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
-EXPOSE 80
+RUN a2enmod rewrite
 
-CMD ["apache2-foreground"]
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf \
+    && sed -i 's/Listen 80/Listen 10000/' /etc/apache2/ports.conf \
+    && sed -i 's/<VirtualHost \*:80>/<VirtualHost *:10000>/' /etc/apache2/sites-available/000-default.conf
+
+EXPOSE 10000
+
+CMD php artisan config:clear && php artisan key:generate --force && apache2-foreground
